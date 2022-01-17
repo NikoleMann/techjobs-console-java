@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+
 /**
  * Created by LaunchCode
  */
@@ -61,7 +62,8 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+//                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -110,7 +112,21 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-
-        System.out.println("printJobs is not implemented yet");
+        for (int i = 0; i < someJobs.size(); i++) {
+            for (int f = 0; f < 1; f++) {
+                String listOfJobs = String.valueOf(someJobs.get(i));
+                String[] arrayOfJobs = (listOfJobs.split("\\,"));
+                for (int h = 0; h < arrayOfJobs.length; h++){
+                    arrayOfJobs[h] = arrayOfJobs[h].replace("{"," ");
+                    arrayOfJobs[h] = arrayOfJobs[h].replace("}"," ");
+                    arrayOfJobs[h] = arrayOfJobs[h].replace("=",": ");
+                    System.out.println(arrayOfJobs[h]);
+                }
+                System.out.println("******");
+            }
+        }
+        if (someJobs.isEmpty()) {
+            System.out.println("No jobs fit that search.");
+        }
     }
 }
